@@ -2,7 +2,7 @@ import 'package:uts/database/dbhelper.dart';
 import 'package:uts/model/kontak.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'formKontak.dart';
+import 'package:uts/input/formKontak.dart';
 import 'dart:async';
 
 class HomeKontak extends StatefulWidget {
