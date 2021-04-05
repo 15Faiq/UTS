@@ -1,27 +1,27 @@
 import 'package:uts/database/dbhelper.dart';
-import 'package:uts/model/favorite.dart';
+import 'package:uts/model/kontak.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'formFavorite.dart';
+import 'formKontak.dart';
 import 'dart:async';
 
-class HomeFavorite extends StatefulWidget {
-  HomeFavorite(HomeFavorite);
+class HomeKontak extends StatefulWidget {
+  HomeKontak(HomeKontak);
 
   @override
-  HomeFavoriteState createState() => HomeFavoriteState();
+  HomeKontakState createState() => HomeKontakState();
 }
 
-class HomeFavoriteState extends State<HomeFavorite> {
+class HomeKontakState extends State<HomeKontak> {
   DbHelper dbHelper = DbHelper();
   int count = 0;
-  List<Favorite> FavoriteList;
+  List<Kontak> KontakList;
   @override
   Widget build(BuildContext context) {
     updateListView();
 
-    if (FavoriteList == null) {
-      FavoriteList = List<Favorite>();
+    if (KontakList == null) {
+      KontakList = List<Kontak>();
     }
     return Scaffold(
       body: Column(children: [
@@ -29,17 +29,18 @@ class HomeFavoriteState extends State<HomeFavorite> {
           child: createListView(),
         ),
         Container(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.bottomRight,
           child: SizedBox(
             width: double.infinity,
-            child:  FloatingActionButton(
+            child:FloatingActionButton(
         
         tooltip: 'Increment',
         child: Icon(Icons.add),
+             
               onPressed: () async {
-                var Favorite = await navigateToEntryForm(context, null);
-                if (Favorite != null) {
-                  int result = await dbHelper.insertFavorite(Favorite);
+                var Kontak = await navigateToEntryForm(context, null);
+                if (Kontak != null) {
+                  int result = await dbHelper.insertKontak(Kontak);
                   if (result > 0) {
                     updateListView();
                   }
@@ -52,11 +53,10 @@ class HomeFavoriteState extends State<HomeFavorite> {
     );
   }
 
-  Future<Favorite> navigateToEntryForm(
-      BuildContext context, Favorite Favorite) async {
-      var result = await Navigator.push(context,
+  Future<Kontak> navigateToEntryForm(BuildContext context, Kontak Kontak) async {
+    var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return FormFavorite(Favorite);
+      return FormKontak(Kontak);
     }));
     return result;
   }
@@ -75,24 +75,24 @@ class HomeFavoriteState extends State<HomeFavorite> {
               child: Icon(Icons.contact_mail),
             ),
             title: Text(
-              this.FavoriteList[index].namaFavorite,
+              this.KontakList[index].namaKontak,
               style: textStyle,
             ),
             subtitle: Text(
-              "Nomer: " + this.FavoriteList[index].nomerFavorite 
+              "Nomer: " + this.KontakList[index].nomerKontak.toString() 
               ),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {
-                dbHelper.deleteFavorite(this.FavoriteList[index].idFavorite);
+                dbHelper.deleteKontak(this.KontakList[index].idKontak);
                 updateListView();
               },
             ),
             onTap: () async {
-              var Favorite =
-                  await navigateToEntryForm(context, this.FavoriteList[index]);
-              if (Favorite != null) {
-                int result = await dbHelper.updateFavorite(Favorite);
+              var Kontak =
+                  await navigateToEntryForm(context, this.KontakList[index]);
+              if (Kontak != null) {
+                int result = await dbHelper.updateKontak(Kontak);
                 if (result > 0) {
                   updateListView();
                 }
@@ -107,11 +107,11 @@ class HomeFavoriteState extends State<HomeFavorite> {
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.initDb();
     dbFuture.then((database) {
-      Future<List<Favorite>> FavoriteListFuture = dbHelper.getFavoriteList();
-      FavoriteListFuture.then((FavoriteList) {
+      Future<List<Kontak>> KontakListFuture = dbHelper.getKontakList();
+      KontakListFuture.then((KontakList) {
         setState(() {
-          this.FavoriteList = FavoriteList;
-          this.count = FavoriteList.length;
+          this.KontakList = KontakList;
+          this.count = KontakList.length;
         });
       });
     });
