@@ -76,7 +76,7 @@ class HomeFavoriteState extends State<HomeFavorite> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.pink,
-              child: Icon(Icons.contact_mail),
+              child: Text(this.FavoriteList[index].idFavorite.toString()),
             ),
             title: Text(
               this.FavoriteList[index].namaFavorite,

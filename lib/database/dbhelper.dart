@@ -18,30 +18,28 @@ class DbHelper {
     return kontakDatabase;
   }
 
-  void _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    _createDb(db, newVersion);
-  }
+
 
   void _createDb(Database db, int version) async {
     var batch = db.batch();
     batch.execute('DROP TABLE IF EXISTS kontak');
     batch.execute('DROP TABLE IF EXISTS favorite');
     batch.execute('''
- CREATE TABLE kontak (
- idKontak INTEGER PRIMARY KEY AUTOINCREMENT,
-  namaKontak TEXT,
-  nomerKontak TEXT,
-  alamatEmailKontak TEXT
- )
- ''');
+    CREATE TABLE kontak (
+    idKontak INTEGER PRIMARY KEY AUTOINCREMENT,
+      namaKontak TEXT,
+      nomerKontak TEXT,
+      alamatEmailKontak TEXT
+    )
+    ''');
     batch.execute('''
- CREATE TABLE favorite (
- idFavorite INTEGER PRIMARY KEY AUTOINCREMENT,
-  namaFavorite TEXT,
-  nomerFavorite TEXT,
-  alamatEmailFavorite TEXT
- )
- ''');
+    CREATE TABLE favorite (
+    idFavorite INTEGER PRIMARY KEY AUTOINCREMENT,
+      namaFavorite TEXT,
+      nomerFavorite TEXT,
+      alamatEmailFavorite TEXT
+    )
+    ''');
     await batch.commit();
   }
 
@@ -50,6 +48,8 @@ class DbHelper {
     var mapList = await db.query('kontak', orderBy: 'namaKontak');
     return mapList;
   }
+
+  
 
   Future<List<Map<String, dynamic>>> selectFavorite() async {
     Database db = await this.initDb();

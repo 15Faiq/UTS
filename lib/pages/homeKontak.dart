@@ -72,7 +72,7 @@ class HomeKontakState extends State<HomeKontak> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.pink,
-              child: Icon(Icons.contact_mail),
+              child: Text(this.KontakList[index].idKontak.toString()),
             ),
             title: Text(
               this.KontakList[index].namaKontak,
