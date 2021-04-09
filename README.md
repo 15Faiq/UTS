@@ -4,7 +4,7 @@ MI2B-15-FAIQ MAULANA
 
 # IMAGE
 
-![Gambar 1](ss/gambar6.jpeg)
+![Gambar 1](ss/gambar6.jpe)
 ![Gambar 2](ss/gambar5.jpeg)
 ![Gambar 3](ss/gambar4.jpeg)
 ![Gambar 4](ss/gambar3.jpeg)
