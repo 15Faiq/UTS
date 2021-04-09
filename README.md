@@ -2,7 +2,7 @@
 
 MI2B-15-FAIQ MAULANA
 
-## Getting Started
+# IMAGE
 
 ![Gambar 1](ss/ss6.jpeg)
 ![Gambar 2](ss/ss5.jpeg)
